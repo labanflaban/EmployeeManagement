@@ -1,0 +1,63 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Employees</h1>
+    <form action="https://localhost:7265/Customers/Create">
+        <button type="submit">Create Employee</button>
+    </form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Title></th>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Company name</th>
+            <th>E-mail</th>
+            <th>Phone number</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.customers != null)
+        {
+            @for (int i = Model.customers.Count() -1; i > Model.customers.Count() - 50; i--)
+            {
+                <tr>
+                    <td> 
+                        @Model.customers.ElementAt(i).CustomerId 
+                    </td>
+                    <td>
+                        @Model.customers.ElementAt(i).Title
+                    </td>
+                    <td>
+                        @Model.customers.ElementAt(i).FirstName
+                    </td>
+                    <td>
+                        @Model.customers.ElementAt(i).LastName
+                    </td>
+                    <td>
+                        @Model.customers.ElementAt(i).CompanyName
+                    </td>
+                    <td>
+                        @Model.customers.ElementAt(i).EmailAddress
+                    </td>
+                    <td>
+                        @Model.customers.ElementAt(i).Phone
+                    </td>
+                
+                    <td>
+                        <a asp-page="./Customers/Edit" asp-route-id="@Model.customers.ElementAt(i).CustomerId">Edit</a> |
+                        <a asp-page="./Customers/Details" asp-route-id="@Model.customers.ElementAt(i).CustomerId">Details</a> |
+                        <a asp-page="./Customers/Delete" asp-route-id="@Model.customers.ElementAt(i).CustomerId">Delete</a>
+                    </td>
+                </tr>
+            }
+            
+        }
+    </tbody>
+</table>
